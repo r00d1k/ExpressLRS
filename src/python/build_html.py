@@ -6,6 +6,7 @@ import tempfile
 import filecmp
 import shutil
 import gzip
+import bands
 from external.minify import (html_minifier, rcssmin, rjsmin)
 from external.wheezy.template.engine import Engine
 from external.wheezy.template.ext.core import CoreExtension
@@ -33,7 +34,8 @@ def build_html(mainfile, var, out, env, isTX=False):
         extensions=[CoreExtension("@@")]
     )
     template = engine.get_template(mainfile)
-    has_sub_ghz = '-DRADIO_SX127X=1' in env['BUILD_FLAGS'] or '-DRADIO_LR1121=1' in env['BUILD_FLAGS']
+    has_sub_ghz = '-DRADIO_SX127X=1' in env['BUILD_FLAGS']
+    isDualBand = '-DRADIO_LR1121=1' in env['BUILD_FLAGS']
     if '-DRADIO_SX128X=1' in env['BUILD_FLAGS']:
         chip = 'SX128X'
     elif '-DRADIO_SX127X=1' in env['BUILD_FLAGS']:
@@ -50,7 +52,9 @@ def build_html(mainfile, var, out, env, isTX=False):
             'isTX': isTX,
             'hasSubGHz': has_sub_ghz,
             'chip': chip,
-            'is8285': is8285
+            'is8285': is8285,
+            'bands': bands,
+            'isDualBand': isDualBand
         })
     if mainfile.endswith('.html'):
         data = html_minifier.html_minify(data)

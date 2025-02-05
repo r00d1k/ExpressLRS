@@ -1,4 +1,4 @@
-@@require(PLATFORM, VERSION, isTX, hasSubGHz, is8285)
+@@require(PLATFORM, VERSION, isTX, hasSubGHz, is8285, bands, isDualBand)
 <!DOCTYPE HTML>
 <html lang="en">
 
@@ -53,17 +53,39 @@
 					<br/><br/>
 					<form id='upload_options' method='POST' action="/options">
 @@end
+@@if isDualBand:
+						<div class="mui-select">
+							<select id='domain' name='domain'>
+								@@for bandName in bands.firstRadioBands:
+								<option value='@@{bands.firstRadioBands.index(bandName) !! str}'>@@{bandName}</option>
+								@@end
+							</select>
+							<label for="domain">Freq Band Radio 1</label>
+						</div>
+						<div class="mui-select">
+							<select id='domain2' name='domain2'>
+								@@for bandName in bands.secondRadioBands:
+								<option value='@@{bands.secondRadioBands.index(bandName) !! str}'>@@{bandName}</option>
+								@@end
+							</select>
+							<label for="domain">Freq Band Radio 2</label>
+						</div>
+@@else:
+						<div class="mui-select">
+							<select id='domain' name='domain'>
+							@@for bandName in bands.sx128x:
+								<option value='@@{bands.sx128x.index(bandName) !! str}'>@@{bandName}</option>
+							@@end
+							</select>
+							<label for="domain">Freq Band</label>
+						</div>
+@@end
 @@if hasSubGHz:
 						<div class="mui-select">
 							<select id='domain' name='domain'>
-								<option value='0'>AU915</option>
-								<option value='1'>FCC915</option>
-								<option value='2'>EU868</option>
-								<option value='3'>IN866</option>
-								<option value='4'>AU433</option>
-								<option value='5'>EU433</option>
-								<option value='6'>US433</option>
-								<option value='7'>US433-Wide</option>
+								@@for bandName in bands.firstRadioBands:
+									<option value='@@{bands.firstRadioBands.index(bandName) !! str}'>@@{bandName}</option>
+								@@end
 							</select>
 							<label for="domain">Regulatory domain</label>
 						</div>

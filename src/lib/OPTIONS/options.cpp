@@ -236,6 +236,9 @@ void saveOptions(Stream &stream, bool customised)
     #endif
     doc["is-airport"] = firmwareOptions.is_airport;
     doc["domain"] = firmwareOptions.domain;
+    #if defined(RADIO_LR1121)
+    doc["domain2"] = firmwareOptions.domain2;
+    #endif
     doc["customised"] = customised;
     doc["flash-discriminator"] = firmwareOptions.flash_discriminator;
 
@@ -348,6 +351,9 @@ static void options_LoadFromFlashOrFile(EspFlashStream &strmFlash)
     firmwareOptions.lock_on_first_connection = doc["lock-on-first-connection"] | true;
     #endif
     firmwareOptions.domain = doc["domain"] | 0;
+    #if defined(RADIO_LR1121)
+    firmwareOptions.domain2 = doc["domain2"] | 0;
+    #endif
     firmwareOptions.flash_discriminator = doc["flash-discriminator"] | 0U;
 
     builtinOptions.clear();
