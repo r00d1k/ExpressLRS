@@ -73,21 +73,21 @@
 @@else:
 						<div class="mui-select">
 							<select id='domain' name='domain'>
+	@@if hasSubGHz:
+
+							@@for bandName in bands.sx127x:
+								<option value='@@{bands.sx127x.index(bandName) !! str}'>@@{bandName}</option>
+							@@end
+
+	@@else:
+
 							@@for bandName in bands.sx128x:
 								<option value='@@{bands.sx128x.index(bandName) !! str}'>@@{bandName}</option>
 							@@end
+
+	@@end
 							</select>
 							<label for="domain">Freq Band</label>
-						</div>
-@@end
-@@if hasSubGHz:
-						<div class="mui-select">
-							<select id='domain' name='domain'>
-								@@for bandName in bands.firstRadioBands:
-									<option value='@@{bands.firstRadioBands.index(bandName) !! str}'>@@{bandName}</option>
-								@@end
-							</select>
-							<label for="domain">Regulatory domain</label>
 						</div>
 @@end
 						<div class="mui-textfield">
