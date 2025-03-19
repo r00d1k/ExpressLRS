@@ -175,6 +175,9 @@ if '-DRADIO_SX127X=1' in build_flags or '-DRADIO_LR1121=1' in build_flags:
 else:
     json_flags['domain'] = 0
 
+# TODO: Remove this when we have a better way to handle this
+json_flags['domain'] = 0
+
 # Remove ISM_2400 domain flag if not unit test, it is defined per target config
 if fnmatch.filter(build_flags, '*Regulatory_Domain_ISM_2400*') and \
         target_name != "NATIVE":
