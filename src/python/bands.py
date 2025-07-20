@@ -6,6 +6,7 @@ firstRadioBands = (
     "UA280-320",
     "UA413-453",
     "UA580-620",
+    "UA670-710",
     "UA700-740",
     "UA848-888",
     "UA895-935",
@@ -24,6 +25,7 @@ firstRadioBands = (
 secondRadioBands = (
     "ISM2G4",
     "UA2050-2150",
+    "UA2540-2640",
 )
 
 sx128x = (
